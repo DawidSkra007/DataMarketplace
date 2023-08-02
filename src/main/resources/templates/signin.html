@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="main_style.css">
+
+    <title>Sign-In</title>
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h2>
+            Sign-In
+        </h2>
+
+        <form method="GET" action="/">
+            <button class="btn" type="submit">Home</button>
+        </form>
+    </div>
+
+
+
+    <style>
+        input {
+            margin: 10px;
+        }
+
+        button {
+            align-content: center;
+        }
+    </style>
+    <div class="text-center">
+        <center>
+
+            <form class="form-center card" method="POST" action="/Signin" style="display:inline-table">
+                <table style="vertical-align: center; text-align: center;">
+                    <tr>
+                        <td><label class="col-md-2 control-label" for="name">Username:</label></td>
+                        <td><input type="text" class="inputbox" id="name" name="name" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label class="col-md-2 control-label" for="password">Password:</label></td>
+                        <td><input type="password" class="inputbox" id="password" name="password" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><button id="btn" class="submit btn" type="submit">Sign-In</button></td>
+                    </tr>
+
+
+                </table>
+            </form>
+        </center>
+
+    </div>
+
+
+
+
+</body>
+
+</html>

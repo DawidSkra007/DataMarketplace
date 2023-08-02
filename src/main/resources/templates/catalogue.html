@@ -1,0 +1,136 @@
+<style>
+    .alert-primary {
+        text-align: center;
+    }
+
+    .table {
+        width: 100%;
+        text-align: center;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogue</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h1>TLDR</h1>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/}">Home</a>
+                    </li>
+                </ul>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item nav-link px-3">
+                        <a class="nav-link active" th:href="@{/userCheck}">
+                            <div id="image"></div>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-link px-3">
+                        <a href="#" class="btn btn navbar-btn" th:href="@{/shoppingcart}">
+                            <i class='fa fa-shopping-cart fa-3x' style="color:black"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!--                <ul class="navbar-nav">-->
+                <!--                    -->
+                <!--                </ul>-->
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+    <div class="container-fluid" width="100%">
+        <div class="row " width="100%">
+            <div width="80%">
+                <form method="post" action="/catalogue" display="inline-block">
+                    <table class="table table-responsive table-hover">
+                        <thead>
+                            <th class="text-center">Title</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Price per point</th>
+                            <th class="text-center">Details</th>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each=" dataset: ${datasets}">
+
+                                <td th:text="${dataset.getTitle()}"></td>
+                                <td th:text="${dataset.getDescription()}"></td>
+                                <td> <a>€</a><span th:text="${dataset.getPrice_per_point()}"></span></td>
+                                <td><a th:href="@{'dataset/'+${dataset.getId()}}">
+                                        <span th:text="View"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        var loggedIn = [[${ loggedIn }]];
+        if (loggedIn) {
+            var img = sessionStorage.getItem("image");
+            document.getElementById('image').innerHTML = img;
+        } else {
+            document.getElementById('image').innerHTML = "<i class='fa fa-user-circle fa-3x' style=\"color:black\"></i>";
+        }
+    </script>
+    <!-- STATs pie chart -->
+    <!-- <div id="stats_container" width="100%" height="auto">
+
+        <h1>Order Statistics</h1>
+        <div id="container" style="width: 100%; height: 100%"></div>
+        <script type="text/javascript">
+            var responseObject = "${ datasets }";
+            console.log(responseObject);
+        </script>
+        <script>
+            var number = "${ datasets }";
+
+
+            anychart.onDocumentReady(function () {
+                // set the data
+                var data = [
+                    { x: "White", value: 123 },
+                    { x: "Black or African American", value: 38929319 },
+                    { x: "American Indian and Alaska Native", value: 2932248 },
+                    { x: "Asian", value: 14674252 },
+                    { x: "Native Hawaiian and Other Pacific Islander", value: 540013 },
+                    { x: "Some Other Race", value: 19107368 },
+                    { x: "Two or More Races", value: 9009073 }
+                ];
+
+                // create the chart
+                var chart = anychart.pie();
+
+                // set the chart title
+                chart.title("Datasets Stats");
+
+                // add the data
+                chart.data(data);
+
+                // display the chart in the container
+                chart.container('container');
+                chart.draw();
+
+            });
+        </script>
+    </div> -->
+</body>
+
+</html>

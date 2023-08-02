@@ -1,0 +1,66 @@
+* {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif
+}
+
+.payment {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+.vertical-center {
+    
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
+  }
+
+.card {
+    max-width: 600px;
+    margin: auto;
+    padding: 25px;
+    color: black;
+    background-color: #e9e9e9;
+    border-radius: 12px;
+}
+
+.text-center {
+    text-align: center;
+    vertical-align: center;
+}
+input {
+    margin: 5px;
+}
+
+button {
+    align-content: center;
+ 
+}
+.btn {
+    margin-top: 10px;
+
+    background-color: rgb(38, 60, 255);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rg;
+    color: white;
+}
+.btn:hover{
+    color: white;
+    background-color: rgb(64, 82, 250);
+}
+.alert-primary{
+    text-align: center;
+}
+
+page-header {
+    color: rgb(38, 60, 255);
+    
+}
+
+primary-color {
+    color: rgb(38, 60, 255);
+}

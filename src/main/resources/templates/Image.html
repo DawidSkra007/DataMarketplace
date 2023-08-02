@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script th:inline="javascript">
+    //Here give a random image to sessionStorage
+        var imageURLs = [
+            "<i class= \'fa fa-user fa-3x\' style=\"color:green\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:blue\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:pink\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:purple\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:darkred\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:gold\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:orange\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:cyan\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:seagreen\"></i>",
+            "<i class= \'fa fa-user fa-3x\' style=\"color:violet\"></i>",
+        ];
+        var accId = [[${account.getId}]];
+        var name = [[${account.getName}]];
+        console.log(accId);
+        img = imageURLs[accId%10];
+        console.log(img);
+        sessionStorage.setItem("image",img);
+
+        window.location.replace("/");
+        window.alert(name +" you have successfully logged in!");
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dataset-Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="main_style.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h1>TLDR</h1>
+            </a>
+            <!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+            <!--            <span class="navbar-toggler-icon"></span>-->
+            <!--        </button>-->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/catalogue}">Catalogue</a>
+                    </li>
+                </ul>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item nav-link px-3">
+                        <a class="nav-link active" th:href="@{/userCheck}">
+                            <div id="image"></div>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-link px-3">
+                        <a href="#" class="btn btn navbar-btn" th:href="@{/shoppingcart}">
+                            <i class='fa fa-shopping-cart fa-3x' style="color:black"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="">
+                <form method="post" action="/shoppingcart" display="inline-flex">
+                    <table class="table table.responsive text-center">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Current Quantity</th>
+                                <th>New Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:object="${product}">
+                                <td th:text="${product.getTitle()}"></td>
+                                <td th:text="${product.getQuantity()}"></td>
+                                <td>
+                                    <input type="hidden" name="id" th:value="${dataset.getId()}">
+                                    <input class="col-sm-2" type="number" pattern="\d*" name="quantity"
+                                        th:attr="min=${product.getMinQuantity()},max=${product.getMaxQuantity()}"
+                                        required></input>
+                                    <button class="" type="submit">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        var loggedIn = [[${ loggedIn }]];
+        if (loggedIn) {
+            var img = sessionStorage.getItem("image");
+            document.getElementById('image').innerHTML = img;
+        } else {
+            document.getElementById('image').innerHTML = "<i class='fa fa-user-circle fa-3x' style=\"color:black\"></i>";
+        }
+    </script>
+</body>
+
+</html>

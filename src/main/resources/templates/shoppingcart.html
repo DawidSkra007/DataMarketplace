@@ -1,0 +1,121 @@
+<style>
+    .alert-primary {
+        text-align: center;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">
+                <h1>TLDR</h1>
+            </a>
+            <!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+            <!--            <span class="navbar-toggler-icon"></span>-->
+            <!--        </button>-->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/catalogue}">Catalogue</a>
+                    </li>
+                </ul>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item nav-link px-3">
+                        <a class="nav-link active" th:href="@{/userCheck}">
+                            <div id="image"></div>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-link px-3">
+                        <a href="#" class="btn btn navbar-btn" th:href="@{/shoppingcart}">
+                            <i class='fa fa-shopping-cart fa-3x' style="color:black"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <space></space>
+    <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="">
+                <form method="post" action="/shoppingcart">
+                    <table class="table table-responsive table-hover">
+                        <thead>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Update Quantity</th>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each=" product: ${products}">
+                                <td th:text="${product.getTitle()}"></td>
+                                <td><a>€</a><span th:text="${product.getTotal_price}"></span></td>
+                                <td th:text="${product.getQuantity()}"></td>
+                                <td><a th:href="@{'product/'+${product.getId()}}">
+                                        <span th:text="Update"></span></a>
+                                </td>
+                                <td>
+                                    <input type="hidden" name="id" th:value="${product.getId()}">
+                                    <input type="hidden" name="title" th:value="${product.getTitle()}">
+                                    <button style="align-self: center;" type="submit">X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <br>
+                <center>
+                    <a><span style="font-size:1.1em; font-weight:bold">Total: </span> €<a
+                            th:text="${cart.getTotal()}"></a></a>
+                    <br>
+                    <span th:switch="${loggedIn}">
+                        <form th:case="true" method="GET" action="/payment">
+                            <button class="submit btn btn-primary" type="submit">Pay Here</button>
+                         </form>
+                        <form th:case="false" method="GET" action="/userCheck">
+                            <button class="submit btn btn-primary" type="submit">Sign-in to pay</button>
+                         </form>
+                    </span>
+<!--                    <form method="GET" action="/payment">-->
+<!--                        <button class="submit btn btn-primary" type="submit">Pay Here</button>-->
+<!--                    </form>-->
+                </center>
+                <script th:inline="javascript">
+                    var loggedIn = [[${ loggedIn }]];
+                    if (loggedIn) {
+                        if (sessionStorage.length == 0) {
+                            document.getElementById('image').innerHTML = "<img src='https://i.picsum.photos/id/209/1920/1280.jpg?hmac=VkEKEKhTEKOSFL4n-N4aLnbGGpV5hxuCs2tx_ny4y5g' height='50' width='50' style='border-radius: 12px;' />";
+                        } else {
+                            var img = sessionStorage.getItem("image");
+                            document.getElementById('image').innerHTML = img;
+                        }
+                    } else {
+                        document.getElementById('image').innerHTML = "<i class='fa fa-user-circle fa-3x' style=\"color:black\"></i>";
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
